@@ -1,0 +1,17 @@
+{
+  "name": "custom-lang-tsv",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^0.0.0"
+  },
+  "contributes": {
+    "languages": [
+      {
+        "id": "tsv",
+        "extensions": [
+          ".tsv"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,12 @@
+{
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": true,
+
+    "files.associations": {
+        "*.tsv": "tsv"
+    },
+    "[tsv]": {
+        "editor.detectIndentation": false,
+        "editor.insertSpaces": false
+    }
+}
