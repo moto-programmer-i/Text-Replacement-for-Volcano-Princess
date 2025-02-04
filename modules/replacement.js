@@ -4,6 +4,9 @@ import { PATTERN_TSV_INDEX } from "./pattern-tsv-index.js";
  * corresponds to a line of a pattern tsv
  */
 export class Replacement {
+    static #escapeRegExp = /[/\-\\^$*+?.()|[\]{}]/g;
+    static #escapeReplacement = "\\$&";
+
     #regExp;
     #replacement;
 
@@ -14,7 +17,8 @@ export class Replacement {
      * @param {string} flag 
      */
     constructor(pattern, replacement, flag = undefined) {
-        this.#regExp = new RegExp(pattern, flag);
+        // escape the pattern 
+        this.#regExp = new RegExp(Replacement.escape(pattern), flag);
         this.#replacement = replacement;
     }
 
@@ -53,8 +57,14 @@ export class Replacement {
    
      // ignore the header
      for(let i = 1; i < lines.length; ++i) {
-       // split one tab or spaces
-       const words = lines[i].split(/\t|\s+/);
+
+      //ignore empty line
+      if (!lines[i]) {
+        continue;
+      }
+
+       // split by tab
+       const words = lines[i].split(/\t/);
    
        
        
@@ -80,4 +90,17 @@ export class Replacement {
    
      return replacements;
    }
+
+   /**
+    * escape regular expression
+    * @param {string} str
+    * @returns 
+    */
+   // https://stackoverflow.com/a/3561711
+   static escape(str) {
+    if (!str) {
+      return str;
+    }
+    return str.replace(this.#escapeRegExp, this.#escapeReplacement);
+}
 }
