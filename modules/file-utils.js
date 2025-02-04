@@ -2,7 +2,7 @@ export class FileUtils {
     /**
      * 
      * @param {File} file error if null
-     * @returns {string} the content text
+     * @returns {Promise<string>} the content text
      */
     static async readFileAsText(file) {
         if (file == null) {
